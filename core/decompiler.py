@@ -43,7 +43,7 @@ class APKDecompiler:
             str(self.apk_path),
             '-o', str(self.output_dir),
             '-f',  # force overwrite
-            '--no-debug-info',  # не включать отладочную информацию
+            # --no-debug-info убран для снижения потребления памяти
         ]
         
         try:
