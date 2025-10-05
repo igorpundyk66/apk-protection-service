@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APK Protection Service</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ APK Protection Service</h1>
+            <p class="subtitle">Защита и обфускация Android приложений</p>
+        </header>
+
+        <main>
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-icon">📱</div>
+                    <h2>Загрузите APK файл</h2>
+                    <p>Перетащите файл сюда или нажмите для выбора</p>
+                    <input type="file" id="fileInput" accept=".apk" hidden>
+                    <button class="btn-primary" id="selectBtn">Выбрать файл</button>
+                </div>
+
+                <div class="file-info" id="fileInfo" style="display: none;">
+                    <div class="file-details">
+                        <span class="file-name" id="fileName"></span>
+                        <span class="file-size" id="fileSize"></span>
+                    </div>
+                    <button class="btn-remove" id="removeBtn">✕</button>
+                </div>
+            </div>
+
+            <div class="options-section" id="optionsSection" style="display: none;">
+                <h3>Опции обработки</h3>
+                <div class="options-grid">
+                    <label class="option-item">
+                        <input type="checkbox" id="optRemovePermissions" checked>
+                        <span class="option-label">
+                            <strong>Удалить чувствительные разрешения</strong>
+                            <small>SMS, Accessibility, Notification Listener</small>
+                        </span>
+                    </label>
+
+                    <label class="option-item">
+                        <input type="checkbox" id="optUpdateSdk" checked>
+                        <span class="option-label">
+                            <strong>Обновить targetSdkVersion</strong>
+                            <small>До Android 13 (API 33)</small>
+                        </span>
+                    </label>
+
+                    <label class="option-item">
+                        <input type="checkbox" id="optObfuscateCode" checked>
+                        <span class="option-label">
+                            <strong>Обфусцировать код</strong>
+                            <small>Переименование классов, методов, полей</small>
+                        </span>
+                    </label>
+
+                    <label class="option-item">
+                        <input type="checkbox" id="optObfuscateManifest" checked>
+                        <span class="option-label">
+                            <strong>Обфусцировать манифест</strong>
+                            <small>Изменение структуры AndroidManifest.xml</small>
+                        </span>
+                    </label>
+                </div>
+
+                <button class="btn-process" id="processBtn">
+                    <span class="btn-text">Обработать APK</span>
+                    <span class="btn-icon">🚀</span>
+                </button>
+            </div>
+
+            <div class="progress-section" id="progressSection" style="display: none;">
+                <div class="progress-header">
+                    <h3>Обработка...</h3>
+                    <span class="progress-status" id="progressStatus">Загрузка файла</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <div class="progress-steps">
+                    <div class="step" id="step1">
+                        <div class="step-icon">1</div>
+                        <div class="step-label">Анализ</div>
+                    </div>
+                    <div class="step" id="step2">
+                        <div class="step-icon">2</div>
+                        <div class="step-label">Декомпиляция</div>
+                    </div>
+                    <div class="step" id="step3">
+                        <div class="step-icon">3</div>
+                        <div class="step-label">Модификация</div>
+                    </div>
+                    <div class="step" id="step4">
+                        <div class="step-icon">4</div>
+                        <div class="step-label">Обфускация</div>
+                    </div>
+                    <div class="step" id="step5">
+                        <div class="step-icon">5</div>
+                        <div class="step-label">Пересборка</div>
+                    </div>
+                    <div class="step" id="step6">
+                        <div class="step-icon">6</div>
+                        <div class="step-label">Подпись</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result-section" id="resultSection" style="display: none;">
+                <div class="result-success">
+                    <div class="result-icon">✅</div>
+                    <h3>Обработка завершена!</h3>
+                    <p>Ваш защищенный APK готов к загрузке</p>
+                    <button class="btn-download" id="downloadBtn">
+                        <span>Скачать защищенный APK</span>
+                        <span>⬇️</span>
+                    </button>
+                    <button class="btn-secondary" id="newFileBtn">Обработать другой файл</button>
+                </div>
+            </div>
+
+            <div class="error-section" id="errorSection" style="display: none;">
+                <div class="error-content">
+                    <div class="error-icon">❌</div>
+                    <h3>Ошибка обработки</h3>
+                    <p id="errorMessage"></p>
+                    <button class="btn-secondary" id="retryBtn">Попробовать снова</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="features">
+                <div class="feature">
+                    <span class="feature-icon">🔒</span>
+                    <span class="feature-text">Обход Google Play Protect</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🎭</span>
+                    <span class="feature-text">Продвинутая обфускация</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">⚡</span>
+                    <span class="feature-text">Быстрая обработка</span>
+                </div>
+                <div class="feature">
+                    <span class="feature-icon">🔐</span>
+                    <span class="feature-text">Автоматическая подпись</span>
+                </div>
+            </div>
+            <p class="copyright">APK Protection Service v1.0.0</p>
+        </footer>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
