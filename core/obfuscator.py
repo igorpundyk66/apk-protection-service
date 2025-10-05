@@ -194,28 +194,39 @@ class CodeObfuscator:
                 lines = content.split('\n')
                 new_lines = []
                 
-                skip_until_end = False
-                
                 for line in lines:
-                    # Удаление .line директив
-                    if line.strip().startswith('.line'):
+                    stripped = line.strip()
+                    
+                    # Удаление .line директив (номера строк)
+                    if stripped.startswith('.line'):
                         removed_count += 1
                         continue
                     
-                    # Удаление .local директив
-                    if line.strip().startswith('.local'):
+                    # Удаление .local директив (имена локальных переменных)
+                    # НО НЕ УДАЛЯЕМ .locals (количество локальных переменных)
+                    if stripped.startswith('.local '):  # С пробелом!
                         removed_count += 1
                         continue
                     
-                    # Удаление .source директив
-                    if line.strip().startswith('.source'):
+                    # Удаление .source директив (имя исходного файла)
+                    if stripped.startswith('.source'):
                         removed_count += 1
                         continue
                     
                     # Удаление debug блоков
-                    if '.prologue' in line or '.epilogue' in line:
+                    if '.prologue' in stripped or '.epilogue' in stripped:
                         removed_count += 1
                         continue
+                    
+                    # Удаление .parameter директив (имена параметров)
+                    if stripped.startswith('.parameter'):
+                        removed_count += 1
+                        continue
+                    
+                    # НЕ УДАЛЯЕМ:
+                    # - .registers (количество регистров) - КРИТИЧНО!
+                    # - .locals (количество локальных переменных) - КРИТИЧНО!
+                    # - .method, .end method - определения методов
                     
                     new_lines.append(line)
                 
